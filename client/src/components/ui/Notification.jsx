@@ -18,6 +18,8 @@ const Notification = () => {
     const [showFlashMessage, setShowFlashMessage] = useState(true);
     const [message, setMessage] = useState({ type: '', content: '' });
     const displayTime = 5000; // In millisecond
+    const VAPID_KEY_PUBLIC =
+        'BI-34YjS7EBTAJNZvvMf_w9KvVVOFWkelh-Nbylj2GdgcpE-uRNB3Degvm4oYLQDQMp1svpfu0Y5-Cu0vOJzRUs';
     const config = {
         headers: {
             'Content-Type': 'application/json',
@@ -63,9 +65,7 @@ const Notification = () => {
     };
 
     const handleSubscribe = () => {
-        const applicationServerKey = urlB64ToUint8Array(
-            process.env.VAPID_KEY_PUBLIC
-        );
+        const applicationServerKey = urlB64ToUint8Array(VAPID_KEY_PUBLIC);
 
         swRegistration.pushManager
             .subscribe({
