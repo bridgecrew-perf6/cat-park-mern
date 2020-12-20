@@ -99,7 +99,7 @@ const Posts = () => {
                     </span>
                     <p style={{ fontSize: 'small' }}>
                         1. Please register and login to create post<br></br>
-                        2. Author is displayed as user name<br></br>
+                        2. Author is displayed as user's display name<br></br>
                         3. Click post title to view detailed post<br></br>
                         4. Click author to view author's profile
                     </p>
