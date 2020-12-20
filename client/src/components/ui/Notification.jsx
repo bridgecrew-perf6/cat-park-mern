@@ -18,7 +18,6 @@ const Notification = () => {
     const [showFlashMessage, setShowFlashMessage] = useState(true);
     const [message, setMessage] = useState({ type: '', content: '' });
     const displayTime = 5000; // In millisecond
-    const { REACT_APP_VAPID_KEY_PUBLIC } = process.env;
     const config = {
         headers: {
             'Content-Type': 'application/json',
@@ -65,7 +64,7 @@ const Notification = () => {
 
     const handleSubscribe = () => {
         const applicationServerKey = urlB64ToUint8Array(
-            REACT_APP_VAPID_KEY_PUBLIC
+            process.env.VAPID_KEY_PUBLIC
         );
 
         swRegistration.pushManager
