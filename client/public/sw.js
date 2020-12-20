@@ -59,9 +59,5 @@ this.addEventListener('push', e => {
 
 this.addEventListener('notificationclick', e => {
     e.notification.close();
-    e.waitUntil(
-        this.clients.openWindow(
-            'https://zhiwei-zhang-final-project.herokuapp.com'
-        )
-    );
+    e.waitUntil(this.clients.openWindow(`${process.env.HOST}`));
 });
