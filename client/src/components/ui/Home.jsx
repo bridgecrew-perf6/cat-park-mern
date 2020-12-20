@@ -15,11 +15,11 @@ const Home = () => {
                     backgroundColor: '#ffffff',
                 }}
             >
-                <h2 style={{ marginBottom: '30px' }}>
-                    Welcome {userData.user ? userData.user.displayName : ''},
-                </h2>
-
                 <div className="speech-bubble">
+                    <h5 style={{ marginBottom: '10px' }}>
+                        Welcome<br></br>
+                        {userData.user ? userData.user.displayName : ''},
+                    </h5>
                     <ButtonGroup
                         vertical
                         size="sm"
