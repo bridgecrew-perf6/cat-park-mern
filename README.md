@@ -100,7 +100,7 @@ For style, the website used React Bootstrap to keep a consistent theme. The cont
 
 #### 10. How to protect/hide the 3rd party API keys in the front-end of a MERN stack app in production instead of development
 
--   One possible solution might be adding a back-end endpoint for the front-end to fetch the 3rd party API
+-   One possible solution might be adding a back-end endpoint for the front-end to fetch the API key or letting the back-end do the requests.
 
 App link: https://catpark.herokuapp.com
 
