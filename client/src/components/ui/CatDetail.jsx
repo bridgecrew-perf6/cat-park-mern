@@ -40,9 +40,10 @@ const Post = () => {
 
     const fetchCatByName = async () => {
         try {
+            const resCatApiKey = await axios.get('/api/v1/cats/catapi');
             const config = {
                 headers: {
-                    'x-api-key': `${process.env.CAT_API_KEY}`,
+                    'x-api-key': `${resCatApiKey.data}`,
                 },
             };
             const catData = await axios.get(

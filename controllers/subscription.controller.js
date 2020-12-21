@@ -43,3 +43,10 @@ exports.subscribe = async (req, res) => {
         return res.status(500).json('Server Error');
     }
 };
+
+// @desc        Get the VAPID public key from the environment variable
+// @route       GET /api/subscribe
+// @access      Private
+exports.getPublicVapidKey = async (req, res) => {
+    return res.status(200).json(process.env.VAPID_KEY_PUBLIC);
+};

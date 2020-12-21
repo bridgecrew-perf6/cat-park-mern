@@ -62,10 +62,9 @@ const Notification = () => {
         }
     };
 
-    const handleSubscribe = () => {
-        const applicationServerKey = urlB64ToUint8Array(
-            process.env.REACT_APP_VAPID_KEY_PUBLIC
-        );
+    const handleSubscribe = async () => {
+        const resPublicVapidKey = await axios.get('/api/subscribe', config);
+        const applicationServerKey = urlB64ToUint8Array(resPublicVapidKey.data);
 
         swRegistration.pushManager
             .subscribe({
@@ -81,7 +80,6 @@ const Notification = () => {
                     type: 'danger',
                     content: 'Failed to subscribe',
                 });
-                console.log(err);
             });
     };
 
@@ -100,7 +98,6 @@ const Notification = () => {
                     type: 'danger',
                     content: 'Error unsubscribing',
                 });
-                console.log(err);
             });
     };
 

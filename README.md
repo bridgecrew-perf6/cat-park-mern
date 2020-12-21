@@ -98,6 +98,10 @@ For style, the website used React Bootstrap to keep a consistent theme. The cont
 
 -   In `Register.jsx` file, `handleRegister` and `handleLogin` are called sequentially, and each of them has a post request. The `handleLogin` function in `auth.controller.js` file runs `const user = await User.findOne({ userName })`, which may return null because of previous registration's having not written this user into the MongoDB database. It would then cause error for logging in. To solve this problem, `const dummyUser = await User.find({ userName })` has been added before `const user = await User.findOne({ userName })`, which may buy some time for the registration process so that registration would be in the database before logging in happens. Further investigation is still needed.
 
+#### 10. How to protect/hide the 3rd party API keys in the front-end of a MERN stack app in production instead of development
+
+-   One possible solution might be adding a back-end endpoint for the front-end to fetch the 3rd party API
+
 App link: https://catpark.herokuapp.com
 
 Reference:

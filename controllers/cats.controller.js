@@ -19,3 +19,10 @@ exports.getCats = async (req, res) => {
         });
     }
 };
+
+// @desc        Get cat api key
+// @route       GET /api/v1/cats/catapi
+// @access      Public
+exports.getCatApiKey = async (req, res) => {
+    return res.status(200).json(process.env.CAT_API_KEY);
+};

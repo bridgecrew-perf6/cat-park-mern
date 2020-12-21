@@ -9,9 +9,10 @@ const CatItem = ({ cat }) => {
     useEffect(() => {
         const fetchCatInfo = async () => {
             try {
+                const resCatApiKey = await axios.get('/api/v1/cats/catapi');
                 const config = {
                     headers: {
-                        'x-api-key': `${process.env.CAT_API_KEY}`,
+                        'x-api-key': `${resCatApiKey.data}`,
                     },
                 };
                 const catInfo = await axios.get(
