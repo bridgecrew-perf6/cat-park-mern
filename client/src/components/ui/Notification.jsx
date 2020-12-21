@@ -89,9 +89,10 @@ const Notification = () => {
         swRegistration.pushManager
             .getSubscription()
             .then(subscription => {
+                console.log(subscription);
+                updateSubscriptionOnServer(false, null);
+                setIsSubscribed(false);
                 if (subscription) {
-                    updateSubscriptionOnServer(false, null);
-                    setIsSubscribed(false);
                     return subscription.unsubscribe();
                 }
             })
@@ -101,10 +102,10 @@ const Notification = () => {
                     content: 'Error unsubscribing',
                 });
                 console.log(err);
-            })
-            .then(() => {
-                setIsSubscribed(false);
             });
+        // .then(() => {
+        //     setIsSubscribed(false);
+        // });
     };
 
     const validatePush = e => {
