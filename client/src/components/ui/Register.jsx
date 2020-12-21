@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import UserContext from '../../context/UserContext';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Badge from 'react-bootstrap/Badge';
@@ -8,11 +9,8 @@ import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 
 const Register = () => {
+    const { setUserData } = useContext(UserContext);
     const [message, setMessage] = useState({ type: '', content: '' });
-    const [successMessage, setSuccessMessage] = useState({
-        type: '',
-        content: '',
-    });
     const [userName, setUserName] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -22,6 +20,9 @@ const Register = () => {
     const [isValid, setIsValid] = useState(true);
     const [show, setShow] = useState(true);
     const history = useHistory();
+    const config = {
+        headers: { 'Content-Type': 'application/json' },
+    };
 
     const isFormatValid = () => {
         let validationMessage = '';
@@ -36,6 +37,9 @@ const Register = () => {
         }
         if (name.length > 20) {
             validationMessage += 'Length exceeds 20 for display name. ';
+        }
+        if (password !== password2) {
+            validationMessage += 'Passwords do not match. ';
         }
         if (validationMessage) {
             setMessage({ type: 'warning', content: validationMessage });
@@ -55,10 +59,6 @@ const Register = () => {
     };
 
     const register = async () => {
-        const config = {
-            headers: { 'Content-Type': 'application/json' },
-        };
-
         try {
             // Create user
             await axios.post(
@@ -66,19 +66,32 @@ const Register = () => {
                 { userName, name, email, password, isAdmin },
                 config
             );
-            setSuccessMessage({
-                type: 'success',
-                content:
-                    'Successfully registered, redirect to log in page in 2 seconds',
-            });
-
-            setTimeout(() => {
-                history.push('/login');
-            }, 2000);
+            handleLogin();
         } catch (err) {
             setIsValid(false);
-            setMessage({ type: 'warning', content: err.response.data });
+            setMessage({ type: 'danger', content: err.response.data });
             console.log(err.response.data);
+        }
+    };
+
+    const handleLogin = async () => {
+        try {
+            const res = await axios.post(
+                '/api/auth/login',
+                { userName, password },
+                config
+            );
+            setUserData({
+                token: res.data.token,
+                user: res.data.user,
+            });
+            localStorage.setItem('auth-token', res.data.token);
+            history.push('/');
+        } catch (err) {
+            setMessage({
+                type: 'danger',
+                content: err.response.data,
+            });
         }
     };
 
@@ -101,18 +114,6 @@ const Register = () => {
                         dismissible
                     >
                         {message.content}
-                    </Alert>
-                ) : (
-                    ''
-                )}
-                {successMessage.type ? (
-                    <Alert
-                        variant={successMessage.type}
-                        className="res-message"
-                        onClose={() => setShow(false)}
-                        dismissible
-                    >
-                        {successMessage.content}
                     </Alert>
                 ) : (
                     ''
