@@ -18,7 +18,7 @@ const Home = () => {
                 <div className="speech-bubble">
                     <h5 style={{ marginBottom: '10px' }}>
                         Welcome<br></br>
-                        {userData.user ? userData.user.displayName : ''},
+                        {userData.user ? userData.user.displayName + ',' : ''}
                     </h5>
                     <ButtonGroup
                         vertical
