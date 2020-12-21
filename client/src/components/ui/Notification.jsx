@@ -103,9 +103,6 @@ const Notification = () => {
                 });
                 console.log(err);
             });
-        // .then(() => {
-        //     setIsSubscribed(false);
-        // });
     };
 
     const validatePush = e => {

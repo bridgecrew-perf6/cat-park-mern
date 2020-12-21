@@ -1,4 +1,4 @@
-## Final Project - Cat Park
+## Cat Park - a MERN Stack Project
 
 #### 1. A review of functionality and features of the web app
 
