@@ -92,6 +92,12 @@ For style, the website used React Bootstrap to keep a consistent theme. The cont
 -   Add an administration panel or console for better content management and increase the abilities of administrators so that they can delete inappropriate comments.
 -   Add users’ interactions with each other, such as reply to, like, or dislike users’ comments.
 
+#### 9. Issue when handling automatical logging in after registration
+
+-   This issue only happens in production not in development.
+
+-   In `Register.jsx` file, `handleRegister` and `handleLogin` are called sequentially, and each of them has a post request. The `handleLogin` function in `auth.controller.js` file runs `const user = await User.findOne({ userName })`, which may return null because of previous registration's having not written this user into the MongoDB database. It would then cause error for logging in. To solve this problem, `const dummyUser = await User.find({ userName })` has been added before `const user = await User.findOne({ userName })`, which may buy some time for the registration process so that registration would be in the database before logging in happens. Further investigation is still needed.
+
 App link: https://zhiwei-zhang-final-project.herokuapp.com/
 
 Reference:

@@ -11,7 +11,8 @@ exports.handleLogin = async (req, res) => {
         // dummyUser line is used to ensure that DB has written in registered
         // user before starting to find this user. It's for the sequential
         // handling of registration and logging in.
-        const dummyUser = await User.find({ userName });
+        // const dummyUser = await User.find({ userName });
+        // const dummyUser = await User.findOne({ userName });
         const user = await User.findOne({ userName });
 
         if (!user) {
