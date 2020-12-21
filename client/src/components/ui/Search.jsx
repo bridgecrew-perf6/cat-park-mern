@@ -12,6 +12,12 @@ const Search = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [searchContent, setSearchContent] = useState('');
     const [message, setMessage] = useState({ type: '', content: '' });
+    const CAT_API_KEY = process.env.REACT_APP_CAT_API_KEY;
+    const config = {
+        headers: {
+            'x-api-key': `${CAT_API_KEY}`,
+        },
+    };
 
     const handleSearch = async e => {
         e.preventDefault();
@@ -20,11 +26,6 @@ const Search = () => {
         }
 
         try {
-            const config = {
-                headers: {
-                    'x-api-key': `${process.env.CAT_API_KEY}`,
-                },
-            };
             const catList = await axios(
                 `https://api.thecatapi.com/v1/breeds/search?q=${searchContent}`,
                 config
@@ -49,11 +50,6 @@ const Search = () => {
 
     const fetchBreeds = async () => {
         try {
-            const config = {
-                headers: {
-                    'x-api-key': `${process.env.CAT_API_KEY}`,
-                },
-            };
             const catList = await axios(
                 `https://api.thecatapi.com/v1/breeds`,
                 config
