@@ -4,17 +4,17 @@ const auth = async (req, res, next) => {
     try {
         const token = req.header('x-auth-token');
         if (!token) {
-            return res.status(401).json({
-                message: 'No authentication token, authorization denied',
-            });
+            return res
+                .status(401)
+                .json('No authentication token, authorization denied');
         }
 
         // Verify JWT
         const verified = jwt.verify(token, process.env.JWT_SECRET);
         if (!verified) {
-            return res.status(401).json({
-                message: 'Token verification failed, authorization denied',
-            });
+            return res
+                .status(401)
+                .json('Token verification failed, authorization denied');
         }
 
         req.user = verified.id;

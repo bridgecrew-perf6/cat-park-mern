@@ -117,10 +117,14 @@ const Notification = () => {
 
     const handlePush = async () => {
         try {
-            const res = await axios.post(`/api/subscribe`, {
-                pushTitle,
-                pushContent,
-            });
+            const res = await axios.post(
+                `/api/subscribe`,
+                {
+                    pushTitle,
+                    pushContent,
+                },
+                config
+            );
             setMessage({
                 type: 'success',
                 content: `Notification successfully pushed to ${res.data.numOfSubscriber} subscriber(s)`,
